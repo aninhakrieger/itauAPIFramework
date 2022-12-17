@@ -77,7 +77,7 @@ public class ItauService: NSObject {
     }
 }
 
-@available(macOS 10.14, *)
+@available(macOS 12.0, *)
 extension ItauService: URLSessionDelegate {
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         guard let serverTrust = challenge.protectionSpace.serverTrust else {
