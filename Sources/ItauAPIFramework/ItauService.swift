@@ -27,17 +27,6 @@ public class ItauService: NSObject {
     
     private override init (){}
     
-    private func sha256(data : Data) -> String {
-        var keyWithHeader = Data(rsa2048Asn1Header)
-        keyWithHeader.append(data)
-        var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
-        
-        keyWithHeader.withUnsafeBytes {
-            _ = CC_SHA256($0, CC_LONG(keyWithHeader.count), &hash)
-        }
-        return Data(hash).base64EncodedString()
-    }
-    
     public func post(body: [String : Any], completed: @escaping (Result<[String : Any]?, Error>) -> Void) {
         let session = URLSession(configuration: .ephemeral, delegate: self, delegateQueue: nil)
         guard let url = URL(string: baseURL) else {
@@ -74,6 +63,17 @@ public class ItauService: NSObject {
             }
         }
         task.resume()
+    }
+    
+    private func sha256(data : Data) -> String {
+        var keyWithHeader = Data(rsa2048Asn1Header)
+        keyWithHeader.append(data)
+        var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
+        
+        keyWithHeader.withUnsafeBytes {
+            _ = CC_SHA256($0, CC_LONG(keyWithHeader.count), &hash)
+        }
+        return Data(hash).base64EncodedString()
     }
 }
 
