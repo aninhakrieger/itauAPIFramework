@@ -9,7 +9,7 @@ import Foundation
 
 
 public enum HTTPMethod: String {
-  case post = "POST"
+    case post = "POST"
 }
 
 @available(macOS 10.14, *)
@@ -31,10 +31,10 @@ public class ItauService: SecurityManager {
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
-         } catch let error {
-             print(error.localizedDescription)
-             completed(.failure(ItauError.invalidData))
-         }
+        } catch let error {
+            print(error.localizedDescription)
+            completed(.failure(ItauError.invalidData))
+        }
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.post.rawValue

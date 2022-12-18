@@ -28,7 +28,7 @@ public class SecurityManager: NSObject {
         }
         return Data(hash).base64EncodedString()
     }
-
+    
 }
 
 @available(macOS 10.14, *)
