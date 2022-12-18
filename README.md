@@ -7,9 +7,10 @@ Disponibiliza a conexão com a API por método post, recebendo alguns dados do h
 
 ```swift
 import ItauAPIFramework
+
 ItauService.shared.post(body: data.dictionary) { result in
     switch result {
     case .success(let data):
     case .failure(_):
-    }
+}
 ```
